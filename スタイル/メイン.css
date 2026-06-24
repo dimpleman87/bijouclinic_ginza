@@ -1,0 +1,1402 @@
+/* ==========================================
+   BIJOU CLINIC 銀座 - メインスタイルシート
+   ========================================== */
+
+/* デザインシステム共通変数 */
+:root {
+  --背景メイン: #F4EBE1;          /* 柔らかいスキンピンクベージュ */
+  --背景サブ: #FDFBF7;            /* 明るく清潔感のあるアイボリー */
+  --背景ホワイト: #FFFFFF;
+  --ブランド主色: #A38A75;        /* 品のあるゴールドブロンズ・ブラウン */
+  --ブランド主色-濃: #7D6B58;
+  --ブランド主色-薄: #C0AE9F;
+  --ブランドアクセント: #D0B397;  /* 輝きを表現するゴールド */
+  --テキストメイン: #3D352E;      /* 黒すぎないチャコールブラウン */
+  --テキストサブ: #6E6259;
+  --枠線色: #E5DCD3;
+  
+  --フォント日本語: 'Noto Serif JP', 'Noto Sans JP', sans-serif;
+  --フォント英語: 'Playfair Display', 'Didot', serif;
+  --フォント補助: 'Montserrat', sans-serif;
+
+  --影小: 0 4px 12px rgba(125, 107, 88, 0.05);
+  --影中: 0 8px 24px rgba(125, 107, 88, 0.08);
+  --影大: 0 16px 40px rgba(125, 107, 88, 0.12);
+  
+  --遷移時間: 0.3s;
+}
+
+/* 全体リセットと標準スタイル */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--フォント日本語);
+  color: var(--テキストメイン);
+  background-color: var(--背景サブ);
+  line-height: 1.8;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  overflow-x: hidden;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color var(--遷移時間) ease, opacity var(--遷移時間) ease;
+}
+
+button, input, select, textarea {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  color: inherit;
+  border: none;
+  background: none;
+}
+
+button {
+  cursor: pointer;
+}
+
+/* 共通コンポーネント */
+.共通容器 {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 80px 24px;
+}
+
+.共通容器.スリム {
+  max-width: 720px;
+}
+
+.セクション見出し {
+  margin-bottom: 50px;
+}
+
+.セクション見出し.中央揃え {
+  text-align: center;
+}
+
+.英語見出し {
+  font-family: var(--フォント英語);
+  font-size: 16px;
+  color: var(--ブランド主色);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.日本語見出し {
+  font-size: 28px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  color: var(--テキストメイン);
+  position: relative;
+  display: inline-block;
+  padding-bottom: 12px;
+}
+
+.日本語見出し::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 40px;
+  height: 1px;
+  background-color: var(--ブランド主色);
+}
+
+.セクション見出し.中央揃え .日本語見出し::after {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.セクションリード {
+  margin-top: 15px;
+  color: var(--テキストサブ);
+  font-size: 15px;
+}
+
+/* ナビゲーションバー */
+.ナビゲーションバー {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  background-color: rgba(253, 251, 247, 0.95);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--枠線色);
+  transition: transform var(--遷移時間) ease, background-color var(--遷移時間) ease;
+}
+
+.ヘッダー容器 {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 15px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ロゴリンク {
+  display: flex;
+  align-items: center;
+}
+
+.ヘッダーロゴ {
+  height: 52px;
+  width: auto;
+  transition: transform var(--遷移時間) ease;
+}
+
+.ヘッダーロゴ:hover {
+  transform: scale(1.02);
+}
+
+.ナビメニュー {
+  display: flex;
+  gap: 32px;
+}
+
+.メニュー項目 {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--テキストメイン);
+  position: relative;
+  padding: 6px 0;
+}
+
+.メニュー項目::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background-color: var(--ブランド主色);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform var(--遷移時間) ease;
+}
+
+.メニュー項目:hover {
+  color: var(--ブランド主色);
+}
+
+.メニュー項目:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.予約ボタン {
+  background-color: var(--ブランド主色);
+  color: var(--背景サブ);
+  padding: 10px 24px;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  border-radius: 4px;
+  border: 1px solid var(--ブランド主色);
+  box-shadow: var(--影小);
+}
+
+.予約ボタン:hover {
+  background-color: transparent;
+  color: var(--ブランド主色);
+  box-shadow: none;
+}
+
+/* モバイルメニューボタン */
+.モバイルメニューボタン {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 24px;
+  height: 18px;
+  z-index: 1010;
+}
+
+.メニュー線 {
+  display: block;
+  width: 100%;
+  height: 1px;
+  background-color: var(--ブランド主色);
+  transition: transform var(--遷移時間) ease, opacity var(--遷移時間) ease;
+}
+
+/* モバイルナビゲーション */
+.モバイルナビゲーション {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 80%;
+  max-width: 320px;
+  height: 100vh;
+  background-color: var(--背景サブ);
+  z-index: 999;
+  padding: 100px 40px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  box-shadow: var(--影大);
+  transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.モバイルナビゲーション.有効 {
+  right: 0;
+}
+
+.モバイルメニュー項目 {
+  font-size: 16px;
+  font-weight: 500;
+  border-bottom: 1px solid var(--枠線色);
+  padding-bottom: 8px;
+}
+
+.モバイル予約ボタン {
+  margin-top: 20px;
+  background-color: var(--ブランド主色);
+  color: var(--背景サブ);
+  text-align: center;
+  padding: 14px;
+  font-size: 14px;
+  border-radius: 4px;
+  font-weight: 500;
+}
+
+/* メインビジュアル */
+.メインビジュアル領域 {
+  position: relative;
+  height: 100vh;
+  min-height: 600px;
+  display: flex;
+  align-items: center;
+  padding: 0 8%;
+  margin-top: 0;
+  overflow: hidden;
+}
+
+.メインビジュアル背景画像 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  /* 画像がない場合の、上品なベージュ・ゴールド・ブロンズのグラデーションプレースホルダー */
+  background-image: linear-gradient(135deg, #F4EBE1 0%, #DCCFBF 50%, #C8B8A6 100%);
+  z-index: 1;
+}
+
+/* 背景画像が存在しない・読み込めない時の美しい代替装飾 */
+.メインビジュアル背景画像::before {
+  content: '';
+  position: absolute;
+  top: 20%;
+  right: 10%;
+  width: 400px;
+  height: 400px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(208, 179, 151, 0.15) 0%, rgba(255, 255, 255, 0) 70%);
+  filter: blur(20px);
+}
+
+.メインビジュアル遮光版 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, rgba(253, 251, 247, 0.9) 0%, rgba(253, 251, 247, 0.5) 50%, rgba(253, 251, 247, 0) 100%);
+  z-index: 2;
+}
+
+.メインビジュアル内容 {
+  position: relative;
+  z-index: 3;
+  max-width: 580px;
+  animation: フェードイン上 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.メインサブコピー {
+  font-family: var(--フォント英語);
+  color: var(--ブランド主色);
+  font-size: 18px;
+  letter-spacing: 0.3em;
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+
+.メインメインコピー {
+  font-size: 42px;
+  font-weight: 300;
+  line-height: 1.4;
+  letter-spacing: 0.12em;
+  margin-bottom: 25px;
+  color: var(--テキストメイン);
+}
+
+.メインリード文 {
+  font-size: 15px;
+  color: var(--テキストサブ);
+  line-height: 1.8;
+  margin-bottom: 40px;
+}
+
+.メインボタン群 {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.メイン予約ボタン {
+  background-color: var(--ブランド主色);
+  color: var(--背景サブ);
+  padding: 16px 36px;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  border-radius: 4px;
+  border: 1px solid var(--ブランド主色);
+  box-shadow: var(--影中);
+}
+
+.メイン予約ボタン:hover {
+  background-color: transparent;
+  color: var(--ブランド主色);
+  box-shadow: none;
+}
+
+.メイン詳細ボタン {
+  background-color: transparent;
+  color: var(--ブランド主色);
+  border: 1px solid var(--ブランド主色);
+  padding: 16px 36px;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  border-radius: 4px;
+}
+
+.メイン詳細ボタン:hover {
+  background-color: var(--ブランド主色);
+  color: var(--背景サブ);
+}
+
+/* コンセプト領域 */
+.コンセプト領域 {
+  background-color: var(--背景ホワイト);
+}
+
+.コンセプト分割配置 {
+  display: flex;
+  gap: 60px;
+  align-items: center;
+}
+
+.コンセプト画像枠 {
+  flex: 1;
+  height: 480px;
+  border-radius: 4px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  /* 画像がない場合の上品なスキンベージュプレースホルダー */
+  background-color: var(--背景メイン);
+  background-image: linear-gradient(135deg, #FDFBF7 0%, #E8DDD3 100%);
+  box-shadow: var(--影中);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.画像代替テキスト {
+  font-family: var(--フォント英語);
+  color: var(--ブランド主色-薄);
+  letter-spacing: 0.3em;
+  font-size: 20px;
+  opacity: 0.7;
+}
+
+.コンセプト画像枠::after {
+  content: '';
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  right: 15px;
+  bottom: 15px;
+  border: 1px solid rgba(163, 138, 117, 0.2);
+  pointer-events: none;
+}
+
+.コンセプト文章枠 {
+  flex: 1.2;
+}
+
+.コンセプト小見出し {
+  font-size: 22px;
+  font-weight: 400;
+  color: var(--テキストメイン);
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+
+.コンセプト段落 {
+  color: var(--テキストサブ);
+  font-size: 15px;
+  margin-bottom: 24px;
+}
+
+.特徴リスト {
+  margin-top: 35px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.特徴項目 {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--枠線色);
+}
+
+.特徴番号 {
+  font-family: var(--フォント英語);
+  font-size: 18px;
+  color: var(--ブランド主色);
+  font-weight: 500;
+}
+
+.特徴名 {
+  font-size: 15px;
+  font-weight: 500;
+}
+
+/* サブスク領域 */
+.サブスク領域 {
+  background-color: var(--背景サブ);
+}
+
+.プラン紹介カード容器 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  margin-bottom: 60px;
+  align-items: stretch;
+}
+
+.プランカード {
+  background-color: var(--背景ホワイト);
+  border-radius: 8px;
+  padding: 50px 30px;
+  width: 100%;
+  box-shadow: var(--影中);
+  text-align: center;
+  border: 1px solid var(--枠線色);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform var(--遷移時間) ease, box-shadow var(--遷移時間) ease;
+}
+
+.プランカード:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--影大);
+}
+
+.プランカード.推奨 {
+  border: 2px solid var(--ブランド主色);
+  transform: scale(1.03);
+  box-shadow: var(--影大);
+  z-index: 2;
+}
+
+.プランカード.推奨:hover {
+  transform: scale(1.03) translateY(-5px);
+}
+
+.プランバッジ {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--ブランド主色);
+  color: var(--背景サブ);
+  padding: 6px 24px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  border-radius: 0 0 12px 12px;
+}
+
+.プラン英語名 {
+  font-family: var(--フォント英語);
+  font-size: 14px;
+  color: var(--ブランド主色);
+  letter-spacing: 0.2em;
+  display: block;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+
+.プラン名 {
+  font-size: 26px;
+  font-weight: 500;
+  margin-bottom: 15px;
+  letter-spacing: 0.08em;
+}
+
+.プラン説明 {
+  font-size: 14px;
+  color: var(--テキストサブ);
+  max-width: 480px;
+  margin: 0 auto 30px;
+}
+
+.プラン価格枠 {
+  background-color: rgba(244, 235, 225, 0.5);
+  border-radius: 4px;
+  padding: 20px;
+  margin-bottom: 40px;
+  display: inline-block;
+  width: 100%;
+}
+
+.プラン価格 {
+  font-family: var(--フォント英語);
+  font-size: 54px;
+  font-weight: 400;
+  color: var(--ブランド主色-濃);
+  line-height: 1;
+}
+
+.プラン単位 {
+  font-size: 16px;
+  font-weight: 500;
+  margin-left: 8px;
+  color: var(--テキストメイン);
+}
+
+.プラン特典リスト {
+  text-align: left;
+  max-width: 460px;
+  margin: 0 auto 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.特典項目 {
+  display: flex;
+  gap: 12px;
+  font-size: 15px;
+}
+
+.チェックアイコン {
+  color: var(--ブランド主色);
+  font-weight: bold;
+}
+
+.プラン予約ボタン {
+  display: block;
+  background-color: var(--ブランド主色);
+  color: var(--背景サブ);
+  padding: 18px;
+  font-size: 15px;
+  font-weight: 500;
+  border-radius: 4px;
+  box-shadow: var(--影中);
+}
+
+.プラン予約ボタン:hover {
+  background-color: var(--ブランド主色-濃);
+  transform: translateY(-2px);
+}
+
+.プラン強み枠 {
+  display: flex;
+  gap: 30px;
+  margin-top: 50px;
+}
+
+.強みカード {
+  flex: 1;
+  background-color: var(--背景ホワイト);
+  padding: 30px;
+  border-radius: 4px;
+  box-shadow: var(--影小);
+  border: 1px solid var(--枠線色);
+}
+
+.強みアイコン {
+  margin-bottom: 15px;
+}
+
+.強み見出し {
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+.強み説明 {
+  font-size: 14px;
+  color: var(--テキストサブ);
+  line-height: 1.7;
+}
+
+/* 施術領域 */
+.施術領域 {
+  background-color: var(--背景ホワイト);
+}
+
+.施術グリッド {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 30px;
+}
+
+.施術カード {
+  background-color: var(--背景サブ);
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: var(--影小);
+  border: 1px solid var(--枠線色);
+  transition: transform var(--遷移時間) ease, box-shadow var(--遷移時間) ease;
+}
+
+.施術カード:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--影中);
+}
+
+.施術画像枠 {
+  height: 220px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  /* 画像がない場合のプレースホルダー */
+  background-color: var(--背景メイン);
+  background-image: linear-gradient(135deg, #F4EBE1 0%, #DCCFBF 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.施術詳細 {
+  padding: 24px;
+}
+
+.施術名 {
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 10px;
+  color: var(--テキストメイン);
+}
+
+.施術説明 {
+  font-size: 14px;
+  color: var(--テキストサブ);
+  margin-bottom: 20px;
+  line-height: 1.7;
+}
+
+.施術タグ {
+  display: inline-block;
+  background-color: rgba(163, 138, 117, 0.12);
+  color: var(--ブランド主色-濃);
+  font-size: 11px;
+  font-weight: 500;
+  padding: 4px 12px;
+  border-radius: 12px;
+}
+
+/* 流れ領域 */
+.流れ領域 {
+  background-color: var(--背景サブ);
+}
+
+.ステップ容器 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  position: relative;
+}
+
+/* 横線（ステップ間） */
+.ステップ容器::before {
+  content: '';
+  position: absolute;
+  top: 30px;
+  left: 10%;
+  right: 10%;
+  height: 1px;
+  background-color: var(--ブランド主色-薄);
+  z-index: 1;
+}
+
+.ステップ項目 {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+}
+
+.ステップヘッダー {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.ステップ番号 {
+  font-family: var(--フォント英語);
+  font-size: 14px;
+  font-weight: 500;
+  background-color: var(--ブランド主色);
+  color: var(--背景サブ);
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 4px solid var(--背景サブ);
+  box-shadow: var(--影小);
+  margin-bottom: 10px;
+}
+
+.ステップタイトル {
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.ステップ説明 {
+  font-size: 13px;
+  color: var(--テキストサブ);
+  text-align: left;
+  padding: 0 10px;
+  line-height: 1.7;
+}
+
+/* 質問領域 */
+.質問領域 {
+  background-color: var(--背景ホワイト);
+}
+
+.アコーディオン容器 {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.アコーディオン項目 {
+  border-bottom: 1px solid var(--枠線色);
+}
+
+.アコーディオンヘッダー {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 24px 10px;
+  text-align: left;
+  transition: background-color var(--遷移時間) ease;
+}
+
+.アコーディオンヘッダー:hover {
+  background-color: rgba(244, 235, 225, 0.2);
+}
+
+.質問記号 {
+  font-family: var(--フォント英語);
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--ブランド主色);
+  margin-right: 16px;
+}
+
+.質問テキスト {
+  font-size: 15px;
+  font-weight: 500;
+  flex: 1;
+  padding-right: 20px;
+}
+
+.トグルアイコン {
+  width: 12px;
+  height: 12px;
+  position: relative;
+}
+
+.トグルアイコン::before,
+.トグルアイコン::after {
+  content: '';
+  position: absolute;
+  background-color: var(--ブランド主色);
+  transition: transform var(--遷移時間) ease;
+}
+
+/* 水平線 */
+.トグルアイコン::before {
+  top: 5px;
+  left: 0;
+  width: 12px;
+  height: 1px;
+}
+
+/* 垂直線 */
+.トグルアイコン::after {
+  top: 0;
+  left: 5px;
+  width: 1px;
+  height: 12px;
+}
+
+.アコーディオン項目.有効 .トグルアイコン::after {
+  transform: rotate(90deg);
+  opacity: 0;
+}
+
+.アコーディオン回答 {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.回答テキスト {
+  font-size: 14px;
+  color: var(--テキストサブ);
+  padding: 0 10px 24px 36px;
+  line-height: 1.8;
+}
+
+/* 問い合わせ領域 */
+.問い合わせ領域 {
+  background-color: var(--背景サブ);
+}
+
+.フォーム背景枠 {
+  background-color: var(--背景ホワイト);
+  border-radius: 6px;
+  padding: 50px 40px;
+  box-shadow: var(--影中);
+  border: 1px solid var(--枠線色);
+  position: relative;
+}
+
+.入力グループ {
+  margin-bottom: 24px;
+  display: flex;
+  flex-direction: column;
+}
+
+.入力グループ二列 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.入力ラベル {
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.必須ラベル {
+  background-color: var(--ブランド主色);
+  color: var(--背景サブ);
+  font-size: 10px;
+  padding: 2px 8px;
+  border-radius: 2px;
+}
+
+.任意ラベル {
+  background-color: rgba(110, 98, 89, 0.15);
+  color: var(--テキストサブ);
+  font-size: 10px;
+  padding: 2px 8px;
+  border-radius: 2px;
+}
+
+.入力欄,
+.複数行入力欄,
+.選択欄 {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid var(--枠線色);
+  border-radius: 4px;
+  background-color: var(--背景サブ);
+  font-size: 14px;
+  transition: border-color var(--遷移時間) ease, box-shadow var(--遷移時間) ease;
+}
+
+.入力欄:focus,
+.複数行入力欄:focus,
+.選択欄:focus {
+  outline: none;
+  border-color: var(--ブランド主色);
+  box-shadow: 0 0 0 3px rgba(163, 138, 117, 0.15);
+  background-color: var(--背景ホワイト);
+}
+
+.複数行入力欄 {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.カスタムセレクト {
+  position: relative;
+}
+
+.カスタムセレクト::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: 16px;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 6px solid var(--ブランド主色);
+  pointer-events: none;
+}
+
+.選択欄 {
+  appearance: none;
+  padding-right: 40px;
+}
+
+.エラーメッセージ {
+  font-size: 12px;
+  color: #c94b4b;
+  margin-top: 6px;
+  display: none;
+}
+
+.エラーメッセージ.有効 {
+  display: block;
+}
+
+.入力欄.エラーあり,
+.複数行入力欄.エラーあり {
+  border-color: #c94b4b;
+  background-color: rgba(201, 75, 75, 0.02);
+}
+
+.個人情報同意枠 {
+  margin: 35px 0;
+  text-align: center;
+  border-top: 1px solid var(--枠線色);
+  padding-top: 25px;
+}
+
+.同意説明 {
+  font-size: 12px;
+  color: var(--テキストサブ);
+  margin-bottom: 15px;
+}
+
+.チェックボックス容器 {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.チェックボックス容器 input {
+  display: none;
+}
+
+.ダミーチェックボックス {
+  width: 18px;
+  height: 18px;
+  border: 1px solid var(--枠線色);
+  border-radius: 2px;
+  background-color: var(--背景サブ);
+  position: relative;
+  transition: background-color var(--遷移時間) ease, border-color var(--遷移時間) ease;
+}
+
+.チェックボックス容器 input:checked + .ダミーチェックボックス {
+  background-color: var(--ブランド主色);
+  border-color: var(--ブランド主色);
+}
+
+.チェックボックス容器 input:checked + .ダミーチェックボックス::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 5px;
+  width: 5px;
+  height: 9px;
+  border: solid var(--背景サブ);
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.同意テキスト {
+  font-size: 13px;
+}
+
+.必須マーク {
+  color: #c94b4b;
+}
+
+.送信エリア {
+  text-align: center;
+}
+
+.フォーム送信ボタン {
+  background-color: var(--ブランド主色);
+  color: var(--背景サブ);
+  padding: 16px 48px;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  border-radius: 4px;
+  box-shadow: var(--影中);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  min-width: 220px;
+  position: relative;
+}
+
+.フォーム送信ボタン:hover {
+  background-color: var(--ブランド主色-濃);
+  transform: translateY(-2px);
+}
+
+.フォーム送信ボタン:disabled {
+  background-color: var(--ブランド主色-薄);
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* 読み込みスピナー */
+.読み込みスピナー {
+  display: none;
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: var(--背景サブ);
+  animation: スピナー回転 0.8s linear infinite;
+}
+
+.フォーム送信ボタン.送信中 .読み込みスピナー {
+  display: block;
+}
+
+.フォーム送信ボタン.送信中 .ボタンテキスト {
+  opacity: 0.7;
+}
+
+/* 送信完了ボックス */
+.送信完了ボックス {
+  text-align: center;
+  padding: 40px 20px;
+  animation: フェードイン上 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.完了アイコン {
+  margin-bottom: 20px;
+}
+
+.完了見出し {
+  font-size: 22px;
+  font-weight: 500;
+  color: var(--テキストメイン);
+  margin-bottom: 15px;
+}
+
+.完了説明 {
+  font-size: 14px;
+  color: var(--テキストサブ);
+  line-height: 1.8;
+  margin-bottom: 24px;
+}
+
+.完了補足 {
+  font-size: 12px;
+  color: var(--テキストサブ);
+  opacity: 0.8;
+  margin-bottom: 30px;
+}
+
+.閉じるボタン {
+  background-color: transparent;
+  border: 1px solid var(--ブランド主色);
+  color: var(--ブランド主色);
+  padding: 12px 36px;
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.閉じるボタン:hover {
+  background-color: var(--ブランド主色);
+  color: var(--背景サブ);
+}
+
+/* フッター領域 */
+.フッター領域 {
+  background-color: #4A4036;
+  color: #DCCFBF;
+  font-size: 13px;
+  border-top: 1px solid var(--ブランド主色-濃);
+}
+
+.フッター上部 {
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+  border-bottom: 1px solid rgba(220, 207, 191, 0.15);
+  padding-bottom: 40px;
+}
+
+.フッターロゴ {
+  height: 52px;
+  width: auto;
+  margin-bottom: 20px;
+  filter: brightness(0) invert(1) sepia(1) saturate(1) hue-rotate(15deg); /* ロゴをフッター配色に合わせる */
+}
+
+.クリニック住所 {
+  line-height: 1.7;
+}
+
+.フッターリンク枠 {
+  display: flex;
+  gap: 60px;
+}
+
+.リンク列 {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.リンク見出し {
+  color: var(--背景サブ);
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.フッターリンク:hover {
+  color: var(--背景サブ);
+}
+
+.フッター下部 {
+  padding-top: 30px;
+  text-align: center;
+}
+
+.コピーライト {
+  font-size: 11px;
+  opacity: 0.6;
+}
+
+/* アニメーション定義 */
+@keyframes フェードイン上 {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes スピナー回転 {
+  to { transform: rotate(360deg); }
+}
+
+/* スクロールフェードイン用クラス */
+.フェードイン要素 {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.フェードイン要素.表示 {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* レスポンシブメディアクエリ */
+
+/* タブレットサイズ */
+@media (max-width: 900px) {
+  .ナビメニュー {
+    display: none;
+  }
+  
+  .モバイルメニューボタン {
+    display: flex;
+  }
+  
+  .モバイルメニューボタン.有効 .メニュー線:nth-child(1) {
+    transform: translateY(8.5px) rotate(45deg);
+  }
+  
+  .モバイルメニューボタン.有効 .メニュー線:nth-child(2) {
+    opacity: 0;
+  }
+  
+  .モバイルメニューボタン.有効 .メニュー線:nth-child(3) {
+    transform: translateY(-8.5px) rotate(-45deg);
+  }
+
+  .コンセプト分割配置 {
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .コンセプト画像枠 {
+    width: 100%;
+    height: 360px;
+  }
+
+  .プラン紹介カード容器 {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    max-width: 500px;
+    margin: 0 auto 60px;
+  }
+
+  .プランカード.推奨 {
+    transform: none;
+    box-shadow: var(--影中);
+  }
+
+  .プランカード.推奨:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--影大);
+  }
+
+  .ステップ容器 {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+  }
+
+  .ステップ容器::before {
+    display: none; /* モバイルではステップのラインを隠す */
+  }
+
+  .入力グループ二列 {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+}
+
+/* スマートフォンサイズ */
+@media (max-width: 600px) {
+  .共通容器 {
+    padding: 60px 16px;
+  }
+  
+  .ヘッダー容器 {
+    padding: 10px 16px;
+  }
+  
+  .ヘッダーロゴ {
+    height: 40px;
+  }
+  
+  .予約ボタン {
+    display: none; /* スマホ版ヘッダーでは非表示にし、ハンバーガー内に格納 */
+  }
+
+  .メインビジュアル領域 {
+    padding: 0 20px;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .メインビジュアル遮光版 {
+    background: rgba(253, 251, 247, 0.85); /* モバイルではテキストの可読性向上のため遮光を強める */
+  }
+
+  .メインメインコピー {
+    font-size: 32px;
+  }
+
+  .メインボタン群 {
+    justify-content: center;
+  }
+
+  .メイン予約ボタン, .メイン詳細ボタン {
+    width: 100%;
+    padding: 14px 20px;
+  }
+
+  .日本語見出し {
+    font-size: 24px;
+  }
+
+  .プランカード {
+    padding: 40px 24px;
+  }
+
+  .プラン価格 {
+    font-size: 40px;
+  }
+
+  .プラン強み枠 {
+    flex-direction: column;
+  }
+
+  .ステップ容器 {
+    grid-template-columns: 1fr;
+  }
+
+  .ステップ説明 {
+    text-align: center;
+  }
+
+  .フォーム背景枠 {
+    padding: 30px 20px;
+  }
+
+  .フッター上部 {
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .フッターリンク枠 {
+    flex-direction: column;
+    gap: 24px;
+  }
+}
